@@ -1,18 +1,5 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
-
-const AdminDashboard = () => (
-	<div className="p-6 bg-white rounded shadow">
-		<h1 className="text-2xl font-bold text-blue-700 mb-4">Admin Dashboard</h1>
-		<ul className="list-disc ml-6">
-			<li>User Management</li>
-			<li>Pet Listings Management</li>
-			<li>Analytics & Reports</li>
-			<li>Content Moderation</li>
-		</ul>
-	</div>
-);
 
 const OwnerDashboard = () => (
 	<div className="p-6 bg-white rounded shadow">
@@ -88,15 +75,7 @@ const Dashboard = () => {
 	if (!user) {
 		return <GuestDashboard />;
 	}
-
-	switch (user.role) {
-		case "Admin":
-			return <AdminDashboard />;
-		case "Owner":
-			return <OwnerDashboard />;
-		default:
-			return <GuestDashboard />;
-	}
+	return <OwnerDashboard />;
 };
 
 export default Dashboard;

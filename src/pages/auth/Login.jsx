@@ -1,36 +1,58 @@
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+const Login = () => {
+  const [form, setForm] = useState({ email: "", password: "" });
 
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [role, setRole] = useState("Owner");
-  const navigate = useNavigate();
-
-  const handleLogin = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    // Simple mock login for demo: accept any email/password
-    localStorage.setItem("user", JSON.stringify({ email, role }));
-    navigate("/");
+    // Add your login logic here
+    alert("Login functionality coming soon!");
   };
 
   return (
-    <form onSubmit={handleLogin} className="max-w-md mx-auto bg-white p-8 rounded shadow flex flex-col gap-4 mt-8">
-      <h2 className="text-2xl font-bold mb-2 text-center">Login</h2>
-      <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} className="border rounded px-3 py-2" required />
-      <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="border rounded px-3 py-2" required />
-      <select value={role} onChange={e => setRole(e.target.value)} className="border rounded px-3 py-2">
-        <option value="Owner">Pet Owner</option>
-        <option value="Admin">Admin</option>
-        <option value="ShelterAdmin">Shelter Admin</option>
-        <option value="Moderator">Moderator</option>
-        <option value="SystemAdmin">System Admin</option>
-      </select>
-      <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Login</button>
-    </form>
+    <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-pink-50 to-blue-50">
+      <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
+        <h2 className="text-3xl font-bold text-center text-pink-600 mb-6">Login</h2>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            className="border rounded px-3 py-2"
+            value={form.email}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            className="border rounded px-3 py-2"
+            value={form.password}
+            onChange={handleChange}
+            required
+          />
+          <div className="flex justify-between items-center text-sm">
+            <Link to="/forgot-password" className="text-blue-500 hover:underline">
+              Forgot Password?
+            </Link>
+            <Link to="/register" className="text-pink-500 hover:underline">
+              Sign Up
+            </Link>
+          </div>
+          <button
+            type="submit"
+            className="bg-pink-500 text-white py-2 rounded-full font-semibold hover:bg-pink-600 transition"
+          >
+            Login
+          </button>
+        </form>
+      </div>
+    </div>
   );
-}
+};
 
 export default Login;

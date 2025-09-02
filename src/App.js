@@ -5,7 +5,8 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PetListings from "./pages/adoption/PetListings";
-
+// ...other routes...
+<Route path="/login" element={<Login />} />
 function App() {
   return (
     <Router>

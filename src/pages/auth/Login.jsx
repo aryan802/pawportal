@@ -1,15 +1,27 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
+const roles = [
+  { value: "Owner", label: "Owner" },
+  { value: "ShelterAdmin", label: "Shelter Admin" },
+  { value: "Moderator", label: "Moderator" },
+  { value: "SystemAdmin", label: "System Admin" },
+];
 
 const Login = () => {
-  const [form, setForm] = useState({ email: "", password: "" });
+  const [form, setForm] = useState({ email: "", password: "", role: roles[0].value });
+  const navigate = useNavigate();
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your login logic here
-    alert("Login functionality coming soon!");
+    localStorage.setItem("user", JSON.stringify({ email: form.email, role: form.role, name: form.email.split("@")[0] }));
+    if (form.role === "Owner") {
+      navigate("/owner-dashboard");
+    } else {
+      navigate("/dashboard");
+    }
   };
 
   return (
@@ -17,6 +29,19 @@ const Login = () => {
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
         <h2 className="text-3xl font-bold text-center text-pink-600 mb-6">Login</h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <select
+            name="role"
+            value={form.role}
+            onChange={handleChange}
+            className="border rounded px-3 py-2"
+            required
+          >
+            {roles.map((role) => (
+              <option key={role.value} value={role.value}>
+                {role.label}
+              </option>
+            ))}
+          </select>
           <input
             type="email"
             name="email"

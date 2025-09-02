@@ -1,18 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const OwnerDashboard = () => (
-	<div className="p-6 bg-white rounded shadow">
-		<h1 className="text-2xl font-bold text-green-700 mb-4">Pet Owner Dashboard</h1>
-		<ul className="list-disc ml-6">
-			<li>My Pets</li>
-			<li>Adoption Status</li>
-			<li>Healthcare Tracking</li>
-			<li>Reminders & Appointments</li>
-		</ul>
-	</div>
-);
-
 const GuestDashboard = () => (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-pink-50 to-blue-50 py-10">
         <div className="bg-white rounded-3xl shadow-xl p-8 max-w-xl w-full flex flex-col items-center relative">
@@ -76,18 +64,6 @@ const GuestDashboard = () => (
     </div>
 );
 
-const Dashboard = () => {
-	let user = null;
-	try {
-		user = JSON.parse(localStorage.getItem("user"));
-	} catch (e) {
-		user = null;
-	}
-
-	if (!user) {
-		return <GuestDashboard />;
-	}
-	return <OwnerDashboard />;
-};
+const Dashboard = () => <GuestDashboard />;
 
 export default Dashboard;

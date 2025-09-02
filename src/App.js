@@ -5,8 +5,8 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PetListings from "./pages/adoption/PetListings";
-// ...other routes...
-<Route path="/login" element={<Login />} />
+import OwnerDashboard from "./pages/dashboard/OwnerDashboard";
+
 function App() {
   return (
     <Router>
@@ -20,6 +20,8 @@ function App() {
 
             {/* Pet Adoption Listings */}
             <Route path="/pet-listings" element={<PetListings />} />
+            <Route path="/owner-dashboard" element={<OwnerDashboard />} />
+            <Route path="/dashboard" element={<Dashboard />} />
 
             <Route
               path="/admin"

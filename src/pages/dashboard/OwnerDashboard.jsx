@@ -6,15 +6,9 @@ const OwnerDashboard = () => (
     <div className="bg-white rounded-3xl shadow-xl p-8 max-w-2xl w-full flex flex-col items-center relative">
       <h1 className="text-3xl font-bold text-green-700 mb-6 text-center">Owner Dashboard</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
-        <Link to="/settings">
-          <button className="w-full bg-gray-50 border border-gray-200 text-gray-700 px-4 py-4 rounded-xl font-semibold shadow hover:bg-gray-100 transition">
-            System Settings
-          </button>
-        </Link>
         <Link to="/pet-tracking">
           <button className="w-full bg-blue-50 border border-blue-200 text-blue-700 px-4 py-4 rounded-xl font-semibold shadow hover:bg-blue-100 transition">
-            Pet Tracking <br />
-            <span className="text-xs font-normal">(Healthcare, Reminders, Care Tasks)</span>
+            Your Pet <br />
           </button>
         </Link>
         <Link to="/marketplace">

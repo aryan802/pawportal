@@ -5,8 +5,14 @@ import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PetListings from "./pages/adoption/PetListings";
+import PetTracking from "./pages/dashboard/PetTracking";
+import HirePetWalker from "./pages/dashboard/HirePetWalker";
+import VetBooking from "./pages/dashboard/VetBooking";
 import OwnerDashboard from "./pages/dashboard/OwnerDashboard";
-
+import SellBuyPet from "./pages/dashboard/SellBuyPet";
+import InsuranceComparison from "./pages/dashboard/InsuranceComparison";
+import Trainers from "./pages/dashboard/Trainers";
+import LostFound from "./pages/dashboard/LostFound";
 function App() {
   return (
     <Router>
@@ -22,7 +28,13 @@ function App() {
             <Route path="/pet-listings" element={<PetListings />} />
             <Route path="/owner-dashboard" element={<OwnerDashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
-
+            <Route path="/pet-tracking" element={<PetTracking />} />
+            <Route path="/marketplace" element={<SellBuyPet />} />
+            <Route path="/pet-walker" element={<HirePetWalker />} />
+            <Route path="/vet-booking" element={<VetBooking />} />
+            <Route path="/insurance" element={<InsuranceComparison />} />
+            <Route path="/trainers" element={<Trainers />} />
+            <Route path="/lost-found" element={<LostFound />} />
             <Route
               path="/admin"
               element={

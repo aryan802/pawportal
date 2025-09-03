@@ -8,6 +8,13 @@ const roles = [
   { value: "SystemAdmin", label: "System Admin" },
 ];
 
+const roleRoutes = {
+  Owner: "/owner-dashboard",
+  ShelterAdmin: "/shelter-admin-dashboard",
+  Moderator: "/dashboard", // You can create a separate dashboard later
+  SystemAdmin: "/dashboard", // You can create a separate dashboard later
+};
+
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "", role: roles[0].value });
   const navigate = useNavigate();
@@ -17,11 +24,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     localStorage.setItem("user", JSON.stringify({ email: form.email, role: form.role, name: form.email.split("@")[0] }));
-    if (form.role === "Owner") {
-      navigate("/owner-dashboard");
-    } else {
-      navigate("/dashboard");
-    }
+    navigate(roleRoutes[form.role] || "/dashboard");
   };
 
   return (

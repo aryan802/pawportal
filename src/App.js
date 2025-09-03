@@ -13,6 +13,10 @@ import SellBuyPet from "./pages/dashboard/SellBuyPet";
 import InsuranceComparison from "./pages/dashboard/InsuranceComparison";
 import Trainers from "./pages/dashboard/Trainers";
 import LostFound from "./pages/dashboard/LostFound";
+import CommunityForums from "./pages/dashboard/CommunityForums";
+import Events from "./pages/dashboard/Events";
+import ShelterAdminDashboard from "./pages/dashboard/ShelterAdminDashboard";
+import ManagePets from "./pages/dashboard/ManagePets";
 function App() {
   return (
     <Router>
@@ -35,6 +39,10 @@ function App() {
             <Route path="/insurance" element={<InsuranceComparison />} />
             <Route path="/trainers" element={<Trainers />} />
             <Route path="/lost-found" element={<LostFound />} />
+            <Route path="/community-forums" element={<CommunityForums />} />
+            <Route path="/events" element={<Events />} />
+            <Route path="/shelter-admin-dashboard" element={<ShelterAdminDashboard />} />
+            <Route path="/manage-pets" element={<ManagePets />} />
             <Route
               path="/admin"
               element={

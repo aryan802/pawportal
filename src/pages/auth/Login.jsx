@@ -11,7 +11,7 @@ const roles = [
 const roleRoutes = {
   Owner: "/owner-dashboard",
   ShelterAdmin: "/shelter-admin-dashboard",
-  Moderator: "/dashboard", // You can create a separate dashboard later
+  Moderator: "/moderator-dashboard", // You can create a separate dashboard later
   SystemAdmin: "/dashboard", // You can create a separate dashboard later
 };
 

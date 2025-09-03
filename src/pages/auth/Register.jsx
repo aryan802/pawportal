@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 const roles = [
   { value: "Owner", label: "Owner" },
   { value: "ShelterAdmin", label: "Shelter Admin" },
   { value: "Moderator", label: "Moderator" },
   { value: "SystemAdmin", label: "System Admin" },
 ];
-
 const Register = () => {
   const [form, setForm] = useState({
     name: "",
@@ -18,17 +16,14 @@ const Register = () => {
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
-
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (form.password !== form.confirmPassword) {
       setError("Passwords do not match.");
       return;
     }
-    // Simulate registration (replace with real API call)
     localStorage.setItem(
       "user",
       JSON.stringify({
@@ -39,7 +34,6 @@ const Register = () => {
     );
     navigate("/login");
   };
-
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-pink-50 to-blue-50">
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
@@ -116,5 +110,4 @@ const Register = () => {
     </div>
   );
 };
-
 export default Register;

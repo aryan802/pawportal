@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const mockEvents = [
   {
     id: 1,
@@ -54,7 +53,6 @@ const mockEvents = [
     registration: "",
   },
 ];
-
 const tagColors = {
   Carnival: "bg-pink-100 text-pink-700",
   Adoption: "bg-green-100 text-green-700",
@@ -68,10 +66,8 @@ const tagColors = {
   Training: "bg-indigo-100 text-indigo-700",
   Workshop: "bg-purple-100 text-purple-700",
 };
-
 const Events = () => {
   const [events] = useState(mockEvents);
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-purple-50 to-yellow-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-4xl w-full flex flex-col items-center relative">
@@ -136,5 +132,4 @@ const Events = () => {
     </div>
   );
 };
-
 export default Events;

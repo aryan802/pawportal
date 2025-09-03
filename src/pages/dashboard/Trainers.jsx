@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const mockTrainers = [
   {
     id: 1,
@@ -44,10 +43,8 @@ const mockTrainers = [
     nextAvailable: "In 3 days",
   },
 ];
-
 const Trainers = () => {
   const [trainers] = useState(mockTrainers);
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-indigo-50 to-blue-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-3xl w-full flex flex-col items-center relative">
@@ -94,5 +91,4 @@ const Trainers = () => {
     </div>
   );
 };
-
 export default Trainers;

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const mockVets = [
   {
     id: 1,
@@ -47,10 +46,8 @@ const mockVets = [
     nextAvailable: "In 2 days",
   },
 ];
-
 const VetBooking = () => {
   const [vets] = useState(mockVets);
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-purple-50 to-blue-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-3xl w-full flex flex-col items-center relative">
@@ -98,5 +95,4 @@ const VetBooking = () => {
     </div>
   );
 };
-
 export default VetBooking;

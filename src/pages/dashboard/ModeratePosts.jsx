@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const mockPosts = [
   {
     id: 1,
@@ -32,34 +31,28 @@ const mockPosts = [
     category: "Activities",
   },
 ];
-
 const statusColors = {
   Pending: "bg-yellow-100 text-yellow-700",
   Approved: "bg-green-100 text-green-700",
   Rejected: "bg-red-100 text-red-700",
 };
-
 const ModeratePosts = () => {
   const [posts, setPosts] = useState(mockPosts);
-
   const handleApprove = (id) => {
     setPosts(posts.map((post) =>
       post.id === id ? { ...post, status: "Approved" } : post
     ));
   };
-
   const handleReject = (id) => {
     setPosts(posts.map((post) =>
       post.id === id ? { ...post, status: "Rejected" } : post
     ));
   };
-
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this post?")) {
       setPosts(posts.filter((post) => post.id !== id));
     }
   };
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-indigo-50 to-blue-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-4xl w-full flex flex-col items-center relative">
@@ -127,5 +120,4 @@ const ModeratePosts = () => {
     </div>
   );
 };
-
 export default ModeratePosts;

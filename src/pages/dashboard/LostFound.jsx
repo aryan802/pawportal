@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const mockLostPets = [
   {
     id: 1,
@@ -39,10 +38,8 @@ const mockLostPets = [
     image: "https://images.unsplash.com/photo-1558788353-f76d92427f16?w=300",
   },
 ];
-
 const LostFound = () => {
   const [pets] = useState(mockLostPets);
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-yellow-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-4xl w-full flex flex-col items-center relative">
@@ -110,5 +107,4 @@ const LostFound = () => {
     </div>
   );
 };
-
 export default LostFound;

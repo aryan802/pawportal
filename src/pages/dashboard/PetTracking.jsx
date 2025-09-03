@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const mockPetData = {
   name: "Bruno",
   lastVetVisit: "2024-12-15",
@@ -24,18 +23,15 @@ const mockPetData = {
   },
   missedVetVisits: 1,
 };
-
 function daysSince(dateStr) {
   const last = new Date(dateStr);
   const now = new Date();
   const diff = Math.floor((now - last) / (1000 * 60 * 60 * 24));
   return diff;
 }
-
 const PetTracking = () => {
   const pet = mockPetData;
   const days = daysSince(pet.lastVetVisit);
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-pink-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-2xl w-full flex flex-col items-center relative">
@@ -92,5 +88,4 @@ const PetTracking = () => {
     </div>
   );
 };
-
 export default PetTracking;

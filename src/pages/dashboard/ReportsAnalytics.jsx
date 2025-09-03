@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const mockReports = {
   totalPets: 42,
   adoptedPets: 28,
@@ -7,7 +6,7 @@ const mockReports = {
   underTreatment: 2,
   totalStaff: 8,
   eventsOrganized: 5,
-  adoptionRate: 67, // percent
+  adoptionRate: 67,
   recentAdoptions: [
     { pet: "Misty", adopter: "Priya Singh", date: "2025-09-01" },
     { pet: "Bruno", adopter: "Amit Sharma", date: "2025-08-28" },
@@ -20,10 +19,8 @@ const mockReports = {
     { month: "September", count: 4 },
   ],
 };
-
 const ReportsAnalytics = () => {
   const [reports] = useState(mockReports);
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-pink-50 to-yellow-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-3xl w-full flex flex-col items-center relative">
@@ -99,5 +96,4 @@ const ReportsAnalytics = () => {
     </div>
   );
 };
-
 export default ReportsAnalytics;

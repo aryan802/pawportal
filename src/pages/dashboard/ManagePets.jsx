@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const mockPets = [
   {
     id: 1,
@@ -35,17 +34,13 @@ const mockPets = [
     description: "Energetic, loves walks, microchipped.",
   },
 ];
-
 const statusColors = {
   Available: "bg-green-100 text-green-700",
   Adopted: "bg-blue-100 text-blue-700",
   "Under Treatment": "bg-yellow-100 text-yellow-700",
 };
-
 const ManagePets = () => {
   const [pets, setPets] = useState(mockPets);
-
-  // Placeholder handlers for edit/delete (implement as needed)
   const handleEdit = (id) => {
     alert(`Edit pet with ID: ${id}`);
   };
@@ -54,7 +49,6 @@ const ManagePets = () => {
       setPets(pets.filter((pet) => pet.id !== id));
     }
   };
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-yellow-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-4xl w-full flex flex-col items-center relative">
@@ -106,5 +100,4 @@ const ManagePets = () => {
     </div>
   );
 };
-
 export default ManagePets;

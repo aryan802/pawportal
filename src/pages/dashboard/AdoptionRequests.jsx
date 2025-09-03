@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const mockRequests = [
   {
     id: 1,
@@ -38,17 +37,13 @@ const mockRequests = [
     message: "I am a first-time pet owner but very enthusiastic.",
   },
 ];
-
 const statusColors = {
   Pending: "bg-yellow-100 text-yellow-700",
   Approved: "bg-green-100 text-green-700",
   Rejected: "bg-red-100 text-red-700",
 };
-
 const AdoptionRequests = () => {
   const [requests, setRequests] = useState(mockRequests);
-
-  // Placeholder handlers for approve/reject (implement as needed)
   const handleApprove = (id) => {
     setRequests(
       requests.map((req) =>
@@ -63,7 +58,6 @@ const AdoptionRequests = () => {
       )
     );
   };
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-yellow-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-4xl w-full flex flex-col items-center relative">
@@ -127,5 +121,4 @@ const AdoptionRequests = () => {
     </div>
   );
 };
-
 export default AdoptionRequests;

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const mockStaff = [
   {
     id: 1,
@@ -32,16 +31,12 @@ const mockStaff = [
     image: "https://images.unsplash.com/photo-1645066928295-2506defde470?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8TWFsZSUyMFZldCUyMGRvY3RvcnxlbnwwfHwwfHx8MA%3D%3D",
   },
 ];
-
 const statusColors = {
   Active: "bg-green-100 text-green-700",
   Inactive: "bg-red-100 text-red-700",
 };
-
 const ManageStaff = () => {
   const [staff, setStaff] = useState(mockStaff);
-
-  // Placeholder handlers for edit/delete (implement as needed)
   const handleEdit = (id) => {
     alert(`Edit staff with ID: ${id}`);
   };
@@ -50,7 +45,6 @@ const ManageStaff = () => {
       setStaff(staff.filter((s) => s.id !== id));
     }
   };
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-yellow-50 to-green-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-4xl w-full flex flex-col items-center relative">
@@ -102,5 +96,4 @@ const ManageStaff = () => {
     </div>
   );
 };
-
 export default ManageStaff;

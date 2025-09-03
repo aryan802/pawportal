@@ -27,6 +27,12 @@ import ModeratePosts from "./pages/dashboard/ModeratePosts";
 import ReviewReports from "./pages/dashboard/ReviewReports";
 import ManageUsers from "./pages/dashboard/ManageUsers";
 import ModeratorMessages from "./pages/dashboard/ModeratorMessages";
+import ModeratorAnalytics from "./pages/dashboard/ModeratorAnalytics";
+import SystemAdminDashboard from "./pages/dashboard/SystemAdminDashboard";
+import ManageAllUsers from "./pages/dashboard/ManageAllUsers";
+import ManageRoles from "./pages/dashboard/ManageRoles";
+import ViewSystemLogs from "./pages/dashboard/ViewSystemLogs";
+import SystemAnalytics from "./pages/dashboard/SystemAnalytics";
 function App() {
   return (
     <Router>
@@ -37,7 +43,6 @@ function App() {
             <Route path="/" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-
             {/* Pet Adoption Listings */}
             <Route path="/pet-listings" element={<PetListings />} />
             <Route path="/owner-dashboard" element={<OwnerDashboard />} />
@@ -63,6 +68,12 @@ function App() {
             <Route path="/review-reports" element={<ReviewReports />} />
             <Route path="/user-management" element={<ManageUsers />} />
             <Route path="/moderator-messages" element={<ModeratorMessages />} />
+            <Route path="/moderator-analytics" element={<ModeratorAnalytics />} />
+            <Route path="/system-admin-dashboard" element={<SystemAdminDashboard />} />
+            <Route path="/system-users" element={<ManageAllUsers />} />
+            <Route path="/system-roles" element={<ManageRoles />} />
+            <Route path="/system-logs" element={<ViewSystemLogs />} />
+            <Route path="/system-analytics" element={<SystemAnalytics />} />
             <Route
               path="/admin"
               element={
@@ -79,7 +90,4 @@ function App() {
     </Router>
   );
 }
-
 export default App;
-
-

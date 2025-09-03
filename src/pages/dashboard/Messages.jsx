@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const mockMessages = [
   {
     id: 1,
@@ -32,16 +31,13 @@ const mockMessages = [
     status: "Read",
   },
 ];
-
 const statusColors = {
   Unread: "bg-yellow-100 text-yellow-700",
   Read: "bg-green-100 text-green-700",
 };
-
 const Messages = () => {
   const [messages, setMessages] = useState(mockMessages);
   const [selected, setSelected] = useState(null);
-
   const handleSelect = (id) => {
     setSelected(id);
     setMessages(
@@ -50,14 +46,12 @@ const Messages = () => {
       )
     );
   };
-
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this message?")) {
       setMessages(messages.filter((msg) => msg.id !== id));
       if (selected === id) setSelected(null);
     }
   };
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-indigo-50 to-yellow-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-4xl w-full flex flex-col items-center relative">
@@ -128,5 +122,4 @@ const Messages = () => {
     </div>
   );
 };
-
 export default Messages;

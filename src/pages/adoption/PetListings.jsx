@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-
-// Example pet data (replace with API or backend later)
 const pets = [
   {
     id: 1,
@@ -111,8 +109,6 @@ const pets = [
     contact: "saurabh.gupta@email.com, +91-9000012345"
   }
 ];
-
-// Pet Profile Modal Component
 const PetProfileModal = ({ pet, onClose }) => {
   if (!pet) return null;
   return (
@@ -166,23 +162,16 @@ const PetProfileModal = ({ pet, onClose }) => {
     </div>
   );
 };
-
 const PetListings = () => {
   const [modalImage, setModalImage] = useState(null);
   const [profilePet, setProfilePet] = useState(null);
   const [adoptPet, setAdoptPet] = useState(null);
   const [adoptForm, setAdoptForm] = useState({ name: '', email: '', message: '' });
   const [adoptSuccess, setAdoptSuccess] = useState(false);
-
-  // Search and filter state
   const [search, setSearch] = useState("");
   const [breedFilter, setBreedFilter] = useState("");
   const [ageFilter, setAgeFilter] = useState("");
-
-  // Get unique breeds for filter dropdown
   const uniqueBreeds = Array.from(new Set(pets.map(p => p.breed)));
-
-  // Filter pets
   const filteredPets = pets.filter(pet => {
     const matchesSearch =
       pet.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -194,11 +183,9 @@ const PetListings = () => {
     if (ageFilter === "senior") matchesAge = pet.age.includes("5") || pet.age.includes("6");
     return matchesSearch && matchesBreed && matchesAge;
   });
-
   return (
     <div className="py-8">
       <h2 className="text-3xl font-bold text-center mb-8 text-blue-700">Adoptable Pets</h2>
-
       {/* Search & Filter Controls */}
       <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
         <input
@@ -229,7 +216,6 @@ const PetListings = () => {
           <option value="senior">Senior (5+ yrs)</option>
         </select>
       </div>
-
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
         {filteredPets.length === 0 && (
           <div className="col-span-full text-center text-gray-400 text-lg">No pets found matching your criteria.</div>
@@ -269,7 +255,6 @@ const PetListings = () => {
           </div>
         ))}
       </div>
-
       {/* Modal for full image view */}
       {modalImage && (
         <div
@@ -294,12 +279,10 @@ const PetListings = () => {
           </div>
         </div>
       )}
-
       {/* Modal for pet profile */}
       {profilePet && (
         <PetProfileModal pet={profilePet} onClose={() => setProfilePet(null)} />
       )}
-
       {/* Modal for adoption form */}
       {adoptPet && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70" onClick={() => { setAdoptPet(null); setAdoptForm({ name: '', email: '', message: '' }); setAdoptSuccess(false); }}>
@@ -347,5 +330,4 @@ const PetListings = () => {
     </div>
   );
 };
-
 export default PetListings;

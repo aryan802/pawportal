@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const mockUsers = [
   {
     id: 1,
@@ -34,15 +33,12 @@ const mockUsers = [
     joined: "2024-07-18",
   },
 ];
-
 const statusColors = {
   Active: "bg-green-100 text-green-700",
   Suspended: "bg-red-100 text-red-700",
 };
-
 const ManageUsers = () => {
   const [users, setUsers] = useState(mockUsers);
-
   const handleSuspend = (id) => {
     setUsers(
       users.map((user) =>
@@ -50,7 +46,6 @@ const ManageUsers = () => {
       )
     );
   };
-
   const handleActivate = (id) => {
     setUsers(
       users.map((user) =>
@@ -58,13 +53,11 @@ const ManageUsers = () => {
       )
     );
   };
-
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       setUsers(users.filter((user) => user.id !== id));
     }
   };
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-blue-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-4xl w-full flex flex-col items-center relative">
@@ -128,5 +121,4 @@ const ManageUsers = () => {
     </div>
   );
 };
-
 export default ManageUsers;

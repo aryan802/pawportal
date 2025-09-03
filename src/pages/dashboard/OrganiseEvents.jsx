@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const mockEvents = [
   {
     id: 1,
@@ -32,17 +31,13 @@ const mockEvents = [
     organizer: "Shelter Admin",
   },
 ];
-
 const statusColors = {
   Upcoming: "bg-green-100 text-green-700",
   Completed: "bg-blue-100 text-blue-700",
   Cancelled: "bg-red-100 text-red-700",
 };
-
 const OrganiseEvents = () => {
   const [events, setEvents] = useState(mockEvents);
-
-  // Placeholder handlers for edit/delete (implement as needed)
   const handleEdit = (id) => {
     alert(`Edit event with ID: ${id}`);
   };
@@ -51,7 +46,6 @@ const OrganiseEvents = () => {
       setEvents(events.filter((event) => event.id !== id));
     }
   };
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-purple-50 to-yellow-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-4xl w-full flex flex-col items-center relative">
@@ -112,5 +106,4 @@ const OrganiseEvents = () => {
     </div>
   );
 };
-
 export default OrganiseEvents;

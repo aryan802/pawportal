@@ -1,6 +1,4 @@
-// filepath: c:\Users\CHANDRA SHEKHAR\Desktop\PawPortal\src\pages\dashboard\SellBuyPet.jsx
 import React, { useState } from "react";
-
 const mockPetsForSale = [
   {
     id: 1,
@@ -25,10 +23,8 @@ const mockPetsForSale = [
     contact: "owner2@email.com, +91-9123456780",
   },
 ];
-
 const SellBuyPet = () => {
   const [pets] = useState(mockPetsForSale);
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-yellow-50 to-pink-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-3xl w-full flex flex-col items-center relative">
@@ -65,5 +61,4 @@ const SellBuyPet = () => {
     </div>
   );
 };
-
 export default SellBuyPet;

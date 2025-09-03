@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const mockThreads = [
   {
     id: 1,
@@ -52,7 +51,6 @@ const mockThreads = [
     excerpt: "Looking for safe dog parks or play areas in Delhi NCR where I can take my golden retriever. Suggestions?",
   },
 ];
-
 const categoryColors = {
   Nutrition: "bg-yellow-100 text-yellow-700",
   Training: "bg-blue-100 text-blue-700",
@@ -60,10 +58,8 @@ const categoryColors = {
   Healthcare: "bg-pink-100 text-pink-700",
   Activities: "bg-purple-100 text-purple-700",
 };
-
 const CommunityForums = () => {
   const [threads] = useState(mockThreads);
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-yellow-50 to-blue-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-4xl w-full flex flex-col items-center relative">
@@ -109,5 +105,4 @@ const CommunityForums = () => {
     </div>
   );
 };
-
 export default CommunityForums;

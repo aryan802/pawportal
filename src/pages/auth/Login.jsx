@@ -1,32 +1,26 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 const roles = [
   { value: "Owner", label: "Owner" },
   { value: "ShelterAdmin", label: "Shelter Admin" },
   { value: "Moderator", label: "Moderator" },
   { value: "SystemAdmin", label: "System Admin" },
 ];
-
 const roleRoutes = {
   Owner: "/owner-dashboard",
   ShelterAdmin: "/shelter-admin-dashboard",
-  Moderator: "/moderator-dashboard", // You can create a separate dashboard later
-  SystemAdmin: "/dashboard", // You can create a separate dashboard later
+  Moderator: "/moderator-dashboard", 
+  SystemAdmin: "/system-admin-dashboard", 
 };
-
 const Login = () => {
   const [form, setForm] = useState({ email: "", password: "", role: roles[0].value });
   const navigate = useNavigate();
-
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
   const handleSubmit = (e) => {
     e.preventDefault();
     localStorage.setItem("user", JSON.stringify({ email: form.email, role: form.role, name: form.email.split("@")[0] }));
     navigate(roleRoutes[form.role] || "/dashboard");
   };
-
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-pink-50 to-blue-50">
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
@@ -82,5 +76,4 @@ const Login = () => {
     </div>
   );
 };
-
 export default Login;

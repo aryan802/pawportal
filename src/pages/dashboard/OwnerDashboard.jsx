@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 const OwnerDashboard = () => (
   <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-pink-50 to-blue-50 py-10">
     <div className="bg-white rounded-3xl shadow-xl p-8 max-w-2xl w-full flex flex-col items-center relative">
@@ -40,5 +39,4 @@ const OwnerDashboard = () => (
     </div>
   </div>
 );
-
 export default OwnerDashboard;

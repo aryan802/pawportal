@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const mockWalkers = [
   {
     id: 1,
@@ -11,7 +10,6 @@ const mockWalkers = [
     petsHandled: ["Dogs", "Cats"],
     contact: "amit.walker@email.com, +91-9876543210",
     description: "Certified dog walker, experienced with all breeds. Friendly and punctual.",
-    // Indian male photo
     image: "https://images.unsplash.com/photo-1649433658557-54cf58577c68?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8SW5kaWFuJTIwR3V5fGVufDB8fDB8fHww",
     available: true,
   },
@@ -42,10 +40,8 @@ const mockWalkers = [
     available: false,
   },
 ];
-
 const HirePetWalker = () => {
   const [walkers] = useState(mockWalkers);
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-green-50 to-blue-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-3xl w-full flex flex-col items-center relative">
@@ -89,5 +85,4 @@ const HirePetWalker = () => {
     </div>
   );
 };
-
 export default HirePetWalker;

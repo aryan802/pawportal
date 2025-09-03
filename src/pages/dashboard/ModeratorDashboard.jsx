@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
 const ModeratorDashboard = () => (
   <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-50 py-10">
     <div className="bg-white rounded-3xl shadow-xl p-8 max-w-2xl w-full flex flex-col items-center relative">
@@ -35,5 +34,4 @@ const ModeratorDashboard = () => (
     </div>
   </div>
 );
-
 export default ModeratorDashboard;

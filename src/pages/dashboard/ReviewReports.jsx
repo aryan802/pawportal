@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-
 const mockReports = [
   {
     id: 1,
@@ -32,16 +31,13 @@ const mockReports = [
     status: "Pending",
   },
 ];
-
 const statusColors = {
   Pending: "bg-yellow-100 text-yellow-700",
   Reviewed: "bg-green-100 text-green-700",
   Rejected: "bg-red-100 text-red-700",
 };
-
 const ReviewReports = () => {
   const [reports, setReports] = useState(mockReports);
-
   const handleReview = (id) => {
     setReports(
       reports.map((r) =>
@@ -49,7 +45,6 @@ const ReviewReports = () => {
       )
     );
   };
-
   const handleReject = (id) => {
     setReports(
       reports.map((r) =>
@@ -57,13 +52,11 @@ const ReviewReports = () => {
       )
     );
   };
-
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this report?")) {
       setReports(reports.filter((r) => r.id !== id));
     }
   };
-
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-yellow-50 to-indigo-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-4xl w-full flex flex-col items-center relative">
@@ -135,5 +128,4 @@ const ReviewReports = () => {
     </div>
   );
 };
-
 export default ReviewReports;

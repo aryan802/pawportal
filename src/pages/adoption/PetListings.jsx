@@ -1,114 +1,25 @@
-import React, { useState } from "react";
-const pets = [
-  {
-    id: 1,
-    name: "Bella",
-    breed: "Golden Retriever",
-    age: "2 years",
-    image: "https://plus.unsplash.com/premium_photo-1694819488591-a43907d1c5cc?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8R29sZGVuJTIwUmV0cmlldmVyJTIwRG9nfGVufDB8fDB8fHww",
-    description: "Friendly and playful, loves kids and other pets.",
-    diseases: "None",
-    allergies: "Chicken",
-    owner: "Priya Sharma",
-    contact: "priya.sharma@email.com, +91-9876543210"
-  },
-  {
-    id: 2,
-    name: "Max",
-    breed: "Labrador Retriever",
-    age: "3 years",
-    image: "https://plus.unsplash.com/premium_photo-1710346963816-9f2e6fb4b768?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8TGFicmFvZG9yJTIwRG9nfGVufDB8fDB8fHww",
-    description: "Energetic and loyal, perfect for active families.",
-    diseases: "Hip Dysplasia",
-    allergies: "None",
-    owner: "Amit Verma",
-    contact: "amit.verma@email.com, +91-9123456780"
-  },
-  {
-    id: 3,
-    name: "Luna",
-    breed: "Siberian Husky",
-    age: "1 year",
-    image: "https://images.unsplash.com/photo-1617895153857-82fe79adfcd4?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8U2liZXJpYW4lMjBIdXNreXxlbnwwfHwwfHx8MA%3D%3D",
-    description: "Smart and curious, needs lots of exercise.",
-    diseases: "None",
-    allergies: "Grain",
-    owner: "Rohit Singh",
-    contact: "rohit.singh@email.com, +91-9988776655"
-  },
-  {
-    id: 4,
-    name: "Charlie",
-    breed: "Beagle",
-    age: "4 years",
-    image: "https://images.unsplash.com/photo-1711297609855-d0ed2e926a18?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8QmVhZ2xlJTIwRG9nfGVufDB8fDB8fHww",
-    description: "Loves to sniff and explore, great with families.",
-    diseases: "Ear Infections",
-    allergies: "None",
-    owner: "Sneha Patel",
-    contact: "sneha.patel@email.com, +91-9001122334"
-  },
-  {
-    id: 5,
-    name: "Milo",
-    breed: "Pug",
-    age: "2 years",
-    image: "https://images.unsplash.com/photo-1587245976235-8967aa9277a3?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8UHVnJTIwRG9nfGVufDB8fDB8fHww",
-    description: "Charming and affectionate, perfect for apartments.",
-    diseases: "None",
-    allergies: "Dairy",
-    owner: "Vikas Kumar",
-    contact: "vikas.kumar@email.com, +91-9876501234"
-  },
-  {
-    id: 6,
-    name: "Simba",
-    breed: "German Shepherd",
-    age: "5 years",
-    image: "https://images.unsplash.com/photo-1676466130130-d2e1dbc8d581?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fEdlcm1hbiUyMFNoZXBoYXJkfGVufDB8fDB8fHww",
-    description: "Loyal, intelligent, and protective.",
-    diseases: "Arthritis",
-    allergies: "None",
-    owner: "Anjali Mehra",
-    contact: "anjali.mehra@email.com, +91-9090909090"
-  },
-  {
-    id: 7,
-    name: "Coco",
-    breed: "Shih Tzu",
-    age: "3 years",
-    image: "https://images.unsplash.com/photo-1534628526458-a8de087b1123?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8U2hpaCUyMFR6dXxlbnwwfHwwfHx8MA%3D%3D",
-    description: "Sweet and gentle, loves cuddles.",
-    diseases: "None",
-    allergies: "Beef",
-    owner: "Rahul Jain",
-    contact: "rahul.jain@email.com, +91-9876543211"
-  },
-  {
-    id: 8,
-    name: "Rocky",
-    breed: "Boxer",
-    age: "2 years",
-    image: "https://plus.unsplash.com/premium_photo-1661903066220-66be070bfcd7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8Qm94ZXIlMjBicmVlZCUyMERvZ3xlbnwwfHwwfHx8MA%3D%3D",
-    description: "Playful and energetic, great with kids.",
-    diseases: "None",
-    allergies: "None",
-    owner: "Meena Joshi",
-    contact: "meena.joshi@email.com, +91-9123456789"
-  },
-  {
-    id: 9,
-    name: "Daisy",
-    breed: "Cocker Spaniel",
-    age: "1.5 years",
-    image: "https://images.unsplash.com/photo-1634318422177-eb9e58ad9f62?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8Y29ja2VyJTIwc3BhbmllbHxlbnwwfHwwfHx8MA%3D%3D",
-    description: "Gentle and affectionate, loves attention.",
-    diseases: "None",
-    allergies: "None",
-    owner: "Saurabh Gupta",
-    contact: "saurabh.gupta@email.com, +91-9000012345"
-  }
-];
+import React, { useState, useEffect } from "react";
+import { useRolePromotion } from "../../hooks/useRolePromotion";
+import { petService } from "../../services/dataService";
+
+const PetListings = () => {
+  const [pets, setPets] = useState([]);
+  const [modalImage, setModalImage] = useState(null);
+  const [profilePet, setProfilePet] = useState(null);
+  const [adoptPet, setAdoptPet] = useState(null);
+  const [adoptForm, setAdoptForm] = useState({ name: '', email: '', message: '' });
+  const [adoptSuccess, setAdoptSuccess] = useState(false);
+  const [search, setSearch] = useState("");
+  const [breedFilter, setBreedFilter] = useState("");
+  const [ageFilter, setAgeFilter] = useState("");
+  const { promoteOnPetAdoption } = useRolePromotion();
+
+  // Load pets data on component mount
+  useEffect(() => {
+    const petsData = petService.getPets();
+    setPets(petsData);
+  }, []);
+
 const PetProfileModal = ({ pet, onClose }) => {
   if (!pet) return null;
   return (
@@ -162,15 +73,6 @@ const PetProfileModal = ({ pet, onClose }) => {
     </div>
   );
 };
-const PetListings = () => {
-  const [modalImage, setModalImage] = useState(null);
-  const [profilePet, setProfilePet] = useState(null);
-  const [adoptPet, setAdoptPet] = useState(null);
-  const [adoptForm, setAdoptForm] = useState({ name: '', email: '', message: '' });
-  const [adoptSuccess, setAdoptSuccess] = useState(false);
-  const [search, setSearch] = useState("");
-  const [breedFilter, setBreedFilter] = useState("");
-  const [ageFilter, setAgeFilter] = useState("");
   const uniqueBreeds = Array.from(new Set(pets.map(p => p.breed)));
   const filteredPets = pets.filter(pet => {
     const matchesSearch =
@@ -297,7 +199,12 @@ const PetListings = () => {
             {adoptSuccess ? (
               <div className="text-green-600 font-semibold text-center py-6">Thank you! Your request has been submitted.</div>
             ) : (
-              <form onSubmit={e => { e.preventDefault(); setAdoptSuccess(true); }} className="flex flex-col gap-3">
+              <form onSubmit={async (e) => { 
+                e.preventDefault(); 
+                setAdoptSuccess(true);
+                // Promote user to Pet Owner if they're a Guest
+                await promoteOnPetAdoption();
+              }} className="flex flex-col gap-3">
                 <input
                   type="text"
                   placeholder="Your Name"

@@ -1,44 +1,48 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-const roles = [
-  { value: "Owner", label: "Owner" },
-  { value: "ShelterAdmin", label: "Shelter Admin" },
-  { value: "Moderator", label: "Moderator" },
-  { value: "SystemAdmin", label: "System Admin" },
-];
-const roleRoutes = {
-  Owner: "/owner-dashboard",
-  ShelterAdmin: "/shelter-admin-dashboard",
-  Moderator: "/moderator-dashboard", 
-  SystemAdmin: "/system-admin-dashboard", 
-};
+import { useAuth } from "../../context/AuthContext";
+import { getRedirectRoute } from "../../services/authService";
+
 const Login = () => {
-  const [form, setForm] = useState({ email: "", password: "", role: roles[0].value });
+  const [form, setForm] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const { login } = useAuth();
+
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-  const handleSubmit = (e) => {
+  
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    localStorage.setItem("user", JSON.stringify({ email: form.email, role: form.role, name: form.email.split("@")[0] }));
-    navigate(roleRoutes[form.role] || "/dashboard");
+    setError("");
+    setLoading(true);
+
+    try {
+      const result = await login(form.email, form.password);
+      
+      if (result.success) {
+        // Redirect based on user role
+        const redirectRoute = getRedirectRoute(result.user.role);
+        navigate(redirectRoute);
+      } else {
+        setError(result.error);
+      }
+    } catch (error) {
+      setError("An unexpected error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-gradient-to-br from-pink-50 to-blue-50">
       <div className="bg-white rounded-2xl shadow-xl p-8 w-full max-w-md">
         <h2 className="text-3xl font-bold text-center text-pink-600 mb-6">Login</h2>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <select
-            name="role"
-            value={form.role}
-            onChange={handleChange}
-            className="border rounded px-3 py-2"
-            required
-          >
-            {roles.map((role) => (
-              <option key={role.value} value={role.value}>
-                {role.label}
-              </option>
-            ))}
-          </select>
+          {error && (
+            <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+              {error}
+            </div>
+          )}
           <input
             type="email"
             name="email"
@@ -47,6 +51,7 @@ const Login = () => {
             value={form.email}
             onChange={handleChange}
             required
+            disabled={loading}
           />
           <input
             type="password"
@@ -56,6 +61,7 @@ const Login = () => {
             value={form.password}
             onChange={handleChange}
             required
+            disabled={loading}
           />
           <div className="flex justify-between items-center text-sm">
             <Link to="/forgot-password" className="text-blue-500 hover:underline">
@@ -67,9 +73,10 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="bg-pink-500 text-white py-2 rounded-full font-semibold hover:bg-pink-600 transition"
+            className="bg-pink-500 text-white py-2 rounded-full font-semibold hover:bg-pink-600 transition disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={loading}
           >
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
       </div>

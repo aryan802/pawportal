@@ -1,8 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 import Navbar from "./components/Navbar";
 import Dashboard from "./pages/dashboard/Dashboard";
 import Login from "./pages/auth/Login";
 import Register from "./pages/auth/Register";
+import ForgotPassword from "./pages/auth/ForgotPassword";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PetListings from "./pages/adoption/PetListings";
 import PetTracking from "./pages/dashboard/PetTracking";
@@ -33,18 +35,27 @@ import ManageAllUsers from "./pages/dashboard/ManageAllUsers";
 import ManageRoles from "./pages/dashboard/ManageRoles";
 import ViewSystemLogs from "./pages/dashboard/ViewSystemLogs";
 import SystemAnalytics from "./pages/dashboard/SystemAnalytics";
+import MyPets from "./pages/management/Mypets";
+import PetAnalytics from "./pages/management/PetAnalytics";
+import HealthDashboard from "./pages/healthcare/HealthDashboard";
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen bg-gray-50 text-gray-800">
-        <Navbar />
-        <main className="container mx-auto px-4 py-6">
+    <AuthProvider>
+      <Router>
+        <div className="min-h-screen bg-gray-50 text-gray-800">
+          <Navbar />
+          <main className="container mx-auto px-4 py-6">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
             {/* Pet Adoption Listings */}
-            <Route path="/pet-listings" element={<PetListings />} />
+            <Route path="/pet-listings" element={
+              <ProtectedRoute>
+                <PetListings />
+              </ProtectedRoute>
+            } />
             <Route path="/owner-dashboard" element={<OwnerDashboard />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/pet-tracking" element={<PetTracking />} />
@@ -74,10 +85,26 @@ function App() {
             <Route path="/system-roles" element={<ManageRoles />} />
             <Route path="/system-logs" element={<ViewSystemLogs />} />
             <Route path="/system-analytics" element={<SystemAnalytics />} />
+            {/* Pet Management */}
+            <Route path="/mypets" element={
+              <ProtectedRoute>
+                <MyPets />
+              </ProtectedRoute>
+            } />
+            <Route path="/pet-analytics" element={
+              <ProtectedRoute>
+                <PetAnalytics />
+              </ProtectedRoute>
+            } />
+            <Route path="/health-dashboard" element={
+              <ProtectedRoute>
+                <HealthDashboard />
+              </ProtectedRoute>
+            } />
             <Route
               path="/admin"
               element={
-                <ProtectedRoute role="Admin">
+                <ProtectedRoute role="System Admin">
                   <h1 className="text-3xl font-bold text-blue-600">
                     Admin Panel
                   </h1>
@@ -88,6 +115,7 @@ function App() {
         </main>
       </div>
     </Router>
+    </AuthProvider>
   );
 }
 export default App;

@@ -18,7 +18,7 @@ const Navbar = () => {
       
       {isAuthenticated ? (
         <div className="flex items-center space-x-4">
-          {/* Navigation Links */}
+          {/* Navigation Links - Role-based */}
           <div className="hidden md:flex items-center space-x-4">
             <Link to="/dashboard" className="hover:text-blue-200 transition">
               Dashboard
@@ -26,15 +26,49 @@ const Navbar = () => {
             <Link to="/pet-listings" className="hover:text-blue-200 transition">
               Pet Listings
             </Link>
-            <Link to="/mypets" className="hover:text-blue-200 transition">
-              My Pets
-            </Link>
-            <Link to="/health-dashboard" className="hover:text-blue-200 transition">
-              Health
-            </Link>
-            <Link to="/pet-analytics" className="hover:text-blue-200 transition">
-              Analytics
-            </Link>
+            {(user?.role === 'Pet Owner' || user?.role === 'Guest') && (
+              <>
+                <Link to="/mypets" className="hover:text-blue-200 transition">
+                  My Pets
+                </Link>
+                <Link to="/health-dashboard" className="hover:text-blue-200 transition">
+                  Health
+                </Link>
+                <Link to="/pet-analytics" className="hover:text-blue-200 transition">
+                  Analytics
+                </Link>
+              </>
+            )}
+            {user?.role === 'Shelter Admin' && (
+              <>
+                <Link to="/manage-pets" className="hover:text-blue-200 transition">
+                  Manage Pets
+                </Link>
+                <Link to="/adoption-requests" className="hover:text-blue-200 transition">
+                  Adoption Requests
+                </Link>
+              </>
+            )}
+            {user?.role === 'Moderator' && (
+              <>
+                <Link to="/moderate-posts" className="hover:text-blue-200 transition">
+                  Moderate Posts
+                </Link>
+                <Link to="/review-reports" className="hover:text-blue-200 transition">
+                  Review Reports
+                </Link>
+              </>
+            )}
+            {user?.role === 'System Admin' && (
+              <>
+                <Link to="/system-users" className="hover:text-blue-200 transition">
+                  Manage Users
+                </Link>
+                <Link to="/system-analytics" className="hover:text-blue-200 transition">
+                  System Analytics
+                </Link>
+              </>
+            )}
           </div>
 
           {/* User Menu */}

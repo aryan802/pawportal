@@ -1,59 +1,68 @@
-import React, { useState } from "react";
-const mockUsers = [
-  {
-    id: 1,
-    name: "Amit Sharma",
-    email: "amit.sharma@email.com",
-    role: "Owner",
-    status: "Active",
-    joined: "2024-03-10",
-  },
-  {
-    id: 2,
-    name: "Priya Singh",
-    email: "priya.singh@email.com",
-    role: "Shelter Admin",
-    status: "Active",
-    joined: "2023-11-22",
-  },
-  {
-    id: 3,
-    name: "Rahul Verma",
-    email: "rahul.verma@email.com",
-    role: "Owner",
-    status: "Suspended",
-    joined: "2025-01-05",
-  },
-  {
-    id: 4,
-    name: "Sneha Kapoor",
-    email: "sneha.kapoor@email.com",
-    role: "Moderator",
-    status: "Active",
-    joined: "2024-07-18",
-  },
-  {
-    id: 5,
-    name: "Admin User",
-    email: "admin@email.com",
-    role: "System Admin",
-    status: "Active",
-    joined: "2023-01-01",
-  },
-];
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../../context/AuthContext";
+import { USER_ROLES } from "../../utils/constants";
+
 const statusColors = {
   Active: "bg-green-100 text-green-700",
   Suspended: "bg-red-100 text-red-700",
 };
+
 const roleColors = {
-  "Owner": "text-blue-700",
-  "Shelter Admin": "text-green-700",
-  "Moderator": "text-indigo-700",
-  "System Admin": "text-pink-700",
+  [USER_ROLES.GUEST]: "text-gray-700",
+  [USER_ROLES.PET_OWNER]: "text-blue-700",
+  [USER_ROLES.SHELTER_ADMIN]: "text-green-700",
+  [USER_ROLES.MODERATOR]: "text-indigo-700",
+  [USER_ROLES.SYSTEM_ADMIN]: "text-pink-700",
 };
+
 const ManageAllUsers = () => {
-  const [users, setUsers] = useState(mockUsers);
+  const { getUsers, updateRole } = useAuth();
+  const [users, setUsers] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  // Load users on component mount
+  useEffect(() => {
+    const loadUsers = async () => {
+      try {
+        setLoading(true);
+        const result = await getUsers();
+        if (result.success) {
+          // Add status field to users (all are Active by default)
+          const usersWithStatus = result.users.map(user => ({
+            ...user,
+            status: "Active"
+          }));
+          setUsers(usersWithStatus);
+        } else {
+          setError(result.error);
+        }
+      } catch (err) {
+        setError("Failed to load users");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadUsers();
+  }, [getUsers]);
+
+  const handleRoleChange = async (userId, newRole) => {
+    try {
+      const result = await updateRole(userId, newRole);
+      if (result.success) {
+        // Update the user in the local state
+        setUsers(users.map(user => 
+          user.id === userId ? { ...user, role: newRole } : user
+        ));
+      } else {
+        setError(result.error);
+      }
+    } catch (err) {
+      setError("Failed to update user role");
+    }
+  };
+
   const handleSuspend = (id) => {
     setUsers(
       users.map((user) =>
@@ -61,6 +70,7 @@ const ManageAllUsers = () => {
       )
     );
   };
+  
   const handleActivate = (id) => {
     setUsers(
       users.map((user) =>
@@ -68,6 +78,7 @@ const ManageAllUsers = () => {
       )
     );
   };
+  
   const handleDelete = (id) => {
     if (window.confirm("Are you sure you want to delete this user?")) {
       setUsers(users.filter((user) => user.id !== id));
@@ -79,12 +90,35 @@ const ManageAllUsers = () => {
       user.email.toLowerCase().includes(search.toLowerCase()) ||
       user.role.toLowerCase().includes(search.toLowerCase())
   );
+
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString();
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-[80vh] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading users...</p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-[80vh] flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 to-gray-50 py-10">
       <div className="bg-white rounded-3xl shadow-xl p-8 max-w-5xl w-full flex flex-col items-center relative">
         <h1 className="text-2xl font-bold text-blue-700 mb-6 text-center">
           Manage All Users
         </h1>
+        
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4 w-full">
+            {error}
+          </div>
+        )}
+        
         <div className="w-full flex justify-end mb-4">
           <input
             type="text"
@@ -118,8 +152,21 @@ const ManageAllUsers = () => {
                 <tr key={user.id} className="hover:bg-blue-50 transition">
                   <td className="px-4 py-2 border-b font-semibold">{user.name}</td>
                   <td className="px-4 py-2 border-b">{user.email}</td>
-                  <td className={`px-4 py-2 border-b font-semibold ${roleColors[user.role] || "text-gray-700"}`}>{user.role}</td>
-                  <td className="px-4 py-2 border-b">{user.joined}</td>
+                  <td className="px-4 py-2 border-b">
+                    <select
+                      value={user.role}
+                      onChange={(e) => handleRoleChange(user.id, e.target.value)}
+                      className={`font-semibold border-0 bg-transparent ${roleColors[user.role] || "text-gray-700"} focus:outline-none focus:ring-2 focus:ring-blue-500 rounded px-1 py-1`}
+                      disabled={user.role === USER_ROLES.SYSTEM_ADMIN}
+                    >
+                      <option value={USER_ROLES.GUEST}>Guest</option>
+                      <option value={USER_ROLES.PET_OWNER}>Pet Owner</option>
+                      <option value={USER_ROLES.SHELTER_ADMIN}>Shelter Admin</option>
+                      <option value={USER_ROLES.MODERATOR}>Moderator</option>
+                      <option value={USER_ROLES.SYSTEM_ADMIN}>System Admin</option>
+                    </select>
+                  </td>
+                  <td className="px-4 py-2 border-b">{formatDate(user.createdAt)}</td>
                   <td className="px-4 py-2 border-b">
                     <span className={`px-3 py-1 rounded-full text-xs font-semibold ${statusColors[user.status] || "bg-gray-100 text-gray-700"}`}>
                       {user.status}
@@ -145,6 +192,7 @@ const ManageAllUsers = () => {
                       <button
                         onClick={() => handleDelete(user.id)}
                         className="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-semibold hover:bg-red-600 transition"
+                        disabled={user.role === USER_ROLES.SYSTEM_ADMIN}
                       >
                         Delete
                       </button>

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { getRedirectRoute } from "../../services/authService";
 import NotificationsPanel from "../../components/NotificationPanel";
 
 // Feature cards data
@@ -80,7 +81,7 @@ const quickActions = [
     id: 2,
     title: "Emergency Vet",
     icon: "🚨",
-    link: "/emergency-vet",
+    link: "/vet-booking",
     urgent: true
   },
   {
@@ -325,7 +326,20 @@ const AuthenticatedDashboard = () => {
 };
 
 const Dashboard = () => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
+  const navigate = useNavigate();
+  
+  // Redirect to role-specific dashboard if authenticated
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      const redirectRoute = getRedirectRoute(user.role);
+      
+      // If not already on the correct dashboard, redirect
+      if (window.location.pathname === '/dashboard' && redirectRoute !== '/dashboard') {
+        navigate(redirectRoute, { replace: true });
+      }
+    }
+  }, [isAuthenticated, user, navigate]);
   
   return isAuthenticated ? <AuthenticatedDashboard /> : <GuestDashboard />;
 };

@@ -56,35 +56,147 @@ function App() {
                 <PetListings />
               </ProtectedRoute>
             } />
-            <Route path="/owner-dashboard" element={<OwnerDashboard />} />
+            <Route path="/owner-dashboard" element={
+              <ProtectedRoute role="Pet Owner">
+                <OwnerDashboard />
+              </ProtectedRoute>
+            } />
             <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/pet-tracking" element={<PetTracking />} />
-            <Route path="/marketplace" element={<SellBuyPet />} />
-            <Route path="/pet-walker" element={<HirePetWalker />} />
-            <Route path="/vet-booking" element={<VetBooking />} />
-            <Route path="/insurance" element={<InsuranceComparison />} />
-            <Route path="/trainers" element={<Trainers />} />
-            <Route path="/lost-found" element={<LostFound />} />
-            <Route path="/community-forums" element={<CommunityForums />} />
-            <Route path="/events" element={<Events />} />
-            <Route path="/shelter-admin-dashboard" element={<ShelterAdminDashboard />} />
-            <Route path="/manage-pets" element={<ManagePets />} />
-            <Route path="/adoption-requests" element={<AdoptionRequests />} />
-            <Route path="/shelter-staff" element={<ManageStaff />} />
-            <Route path="/shelter-events" element={<OrganiseEvents />} />
-            <Route path="/shelter-reports" element={<ReportsAnalytics />} />
-            <Route path="/messages" element={<Messages />} />
-            <Route path="/moderator-dashboard" element={<ModeratorDashboard />} />
-            <Route path="/moderate-posts" element={<ModeratePosts />} />
-            <Route path="/review-reports" element={<ReviewReports />} />
-            <Route path="/user-management" element={<ManageUsers />} />
-            <Route path="/moderator-messages" element={<ModeratorMessages />} />
-            <Route path="/moderator-analytics" element={<ModeratorAnalytics />} />
-            <Route path="/system-admin-dashboard" element={<SystemAdminDashboard />} />
-            <Route path="/system-users" element={<ManageAllUsers />} />
-            <Route path="/system-roles" element={<ManageRoles />} />
-            <Route path="/system-logs" element={<ViewSystemLogs />} />
-            <Route path="/system-analytics" element={<SystemAnalytics />} />
+            <Route path="/pet-tracking" element={
+              <ProtectedRoute role="Pet Owner">
+                <PetTracking />
+              </ProtectedRoute>
+            } />
+            <Route path="/marketplace" element={
+              <ProtectedRoute role="Pet Owner">
+                <SellBuyPet />
+              </ProtectedRoute>
+            } />
+            <Route path="/pet-walker" element={
+              <ProtectedRoute role="Pet Owner">
+                <HirePetWalker />
+              </ProtectedRoute>
+            } />
+            <Route path="/vet-booking" element={
+              <ProtectedRoute>
+                <VetBooking />
+              </ProtectedRoute>
+            } />
+            <Route path="/insurance" element={
+              <ProtectedRoute role="Pet Owner">
+                <InsuranceComparison />
+              </ProtectedRoute>
+            } />
+            <Route path="/trainers" element={
+              <ProtectedRoute role="Pet Owner">
+                <Trainers />
+              </ProtectedRoute>
+            } />
+            <Route path="/lost-found" element={
+              <ProtectedRoute>
+                <LostFound />
+              </ProtectedRoute>
+            } />
+            <Route path="/community-forums" element={
+              <ProtectedRoute>
+                <CommunityForums />
+              </ProtectedRoute>
+            } />
+            <Route path="/events" element={
+              <ProtectedRoute>
+                <Events />
+              </ProtectedRoute>
+            } />
+            <Route path="/shelter-admin-dashboard" element={
+              <ProtectedRoute role="Shelter Admin">
+                <ShelterAdminDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/manage-pets" element={
+              <ProtectedRoute role="Shelter Admin">
+                <ManagePets />
+              </ProtectedRoute>
+            } />
+            <Route path="/adoption-requests" element={
+              <ProtectedRoute role="Shelter Admin">
+                <AdoptionRequests />
+              </ProtectedRoute>
+            } />
+            <Route path="/shelter-staff" element={
+              <ProtectedRoute role="Shelter Admin">
+                <ManageStaff />
+              </ProtectedRoute>
+            } />
+            <Route path="/shelter-events" element={
+              <ProtectedRoute role="Shelter Admin">
+                <OrganiseEvents />
+              </ProtectedRoute>
+            } />
+            <Route path="/shelter-reports" element={
+              <ProtectedRoute role="Shelter Admin">
+                <ReportsAnalytics />
+              </ProtectedRoute>
+            } />
+            <Route path="/messages" element={
+              <ProtectedRoute>
+                <Messages />
+              </ProtectedRoute>
+            } />
+            <Route path="/moderator-dashboard" element={
+              <ProtectedRoute role="Moderator">
+                <ModeratorDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/moderate-posts" element={
+              <ProtectedRoute role="Moderator">
+                <ModeratePosts />
+              </ProtectedRoute>
+            } />
+            <Route path="/review-reports" element={
+              <ProtectedRoute role="Moderator">
+                <ReviewReports />
+              </ProtectedRoute>
+            } />
+            <Route path="/user-management" element={
+              <ProtectedRoute role="Moderator">
+                <ManageUsers />
+              </ProtectedRoute>
+            } />
+            <Route path="/moderator-messages" element={
+              <ProtectedRoute role="Moderator">
+                <ModeratorMessages />
+              </ProtectedRoute>
+            } />
+            <Route path="/moderator-analytics" element={
+              <ProtectedRoute role="Moderator">
+                <ModeratorAnalytics />
+              </ProtectedRoute>
+            } />
+            <Route path="/system-admin-dashboard" element={
+              <ProtectedRoute role="System Admin">
+                <SystemAdminDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/system-users" element={
+              <ProtectedRoute role="System Admin">
+                <ManageAllUsers />
+              </ProtectedRoute>
+            } />
+            <Route path="/system-roles" element={
+              <ProtectedRoute role="System Admin">
+                <ManageRoles />
+              </ProtectedRoute>
+            } />
+            <Route path="/system-logs" element={
+              <ProtectedRoute role="System Admin">
+                <ViewSystemLogs />
+              </ProtectedRoute>
+            } />
+            <Route path="/system-analytics" element={
+              <ProtectedRoute role="System Admin">
+                <SystemAnalytics />
+              </ProtectedRoute>
+            } />
             {/* Pet Management */}
             <Route path="/mypets" element={
               <ProtectedRoute>
@@ -97,6 +209,11 @@ function App() {
               </ProtectedRoute>
             } />
             <Route path="/health-dashboard" element={
+              <ProtectedRoute>
+                <HealthDashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/care-reminders" element={
               <ProtectedRoute>
                 <HealthDashboard />
               </ProtectedRoute>

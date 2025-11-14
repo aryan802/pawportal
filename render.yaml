@@ -1,0 +1,46 @@
+# Render Blueprint for PawPortal Backend
+# This file allows you to deploy the backend with a single click
+# Go to Render Dashboard → New → Blueprint → Connect this repo
+
+services:
+  - type: web
+    name: pawportal-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: FRONTEND_URL
+        sync: false  # Set this manually in Render dashboard
+      - key: DATABASE_HOST
+        sync: false  # Set this manually in Render dashboard
+      - key: DATABASE_PORT
+        value: 4000
+      - key: DATABASE_USERNAME
+        sync: false  # Set this manually in Render dashboard
+      - key: DATABASE_PASSWORD
+        sync: false  # Set this manually in Render dashboard
+      - key: DATABASE_NAME
+        value: pawportal
+      - key: DATABASE_SSL
+        value: "true"
+      - key: JWT_SECRET
+        sync: false  # Generate and set manually
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: JWT_REFRESH_SECRET
+        sync: false  # Generate and set manually
+      - key: JWT_REFRESH_EXPIRES_IN
+        value: 30d
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false  # Set this manually in Render dashboard
+      - key: CLOUDINARY_API_KEY
+        sync: false  # Set this manually in Render dashboard
+      - key: CLOUDINARY_API_SECRET
+        sync: false  # Set this manually in Render dashboard
+
